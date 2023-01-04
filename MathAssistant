@@ -1,0 +1,558 @@
+from tkinter import *
+import tkinter as tk
+from tkinter.ttk import Combobox
+import math
+import random
+
+def calc():
+    def fcalc(event):
+        result.configure(text=str(eval(pole.get())))
+    inputer = tk.Label(win, text="Введите выражение(вместо запятой используйте точку!): (Разрешенные символы:", bg="antiquewhite").grid(row=4)
+    inputer1 = tk.Label(win, text="цифры,'//'-деление нацело,'%'-остаток,'()'-скобки,", bg="antiquewhite").grid(row=5)
+    inputer2 = tk.Label(win, text="'+', '-', '*', '/'-арифметические действия,'**'-степень)", bg="antiquewhite").grid(row=6)
+    pole = tk.Entry(win, width=78)
+    pole.bind("<Return>", fcalc)
+    pole.grid(row=7, column=0)
+    result = tk.Label(win)
+    result.grid(row=8, column=0)
+
+def square():
+    def fsq(event):
+        result.configure(text=str(math.sqrt(int(pole.get()))))
+    inputer = tk.Label(win, text="Введите число, у которого нужно найти приближенное значение кв.корня", bg="antiquewhite").grid(row=9)
+    pole = tk.Entry(win)
+    pole.bind("<Return>", fsq)
+    pole.grid(row=10, column=0)
+    result = tk.Label(win)
+    result.grid(row=11, column=0)
+def factoriale():
+        def fa(event):
+            result.configure(text=str(math.factorial(int(pole.get()))))
+        inputer = tk.Label(win, text="Введите число, у которого нужно найти факториал", bg="antiquewhite").grid(row=12)
+        pole = tk.Entry(win)
+        pole.bind("<Return>", fa)
+        pole.grid(row=13, column=0)
+        result = tk.Label(win)
+        result.grid(row=14, column=0)
+def sin():
+    def fsin(event):
+        result.configure(text=str(math.sin(math.radians(int(pole.get())))))
+
+    inputer = tk.Label(win, text="Введите число, у которого нужно найти синус", bg="antiquewhite").grid(row=15)
+    pole = tk.Entry(win)
+    pole.bind("<Return>", fsin)
+    pole.grid(row=16, column=0)
+    result = tk.Label(win)
+    result.grid(row=17, column=0)
+
+def cos():
+    def fcos(event):
+        result.configure(text=str(math.cos(math.radians(int(pole.get())))))
+
+    inputer = tk.Label(win, text="Введите число, у которого нужно найти косинус", bg="antiquewhite").grid(row=18)
+    pole = tk.Entry(win)
+    pole.bind("<Return>", fcos)
+    pole.grid(row=19, column=0)
+    result = tk.Label(win)
+    result.grid(row=20, column=0)
+
+def tg():
+    def ftg(event):
+        result.configure(text=str(math.tan(math.radians(int(pole.get())))))
+
+    inputer = tk.Label(win, text="Введите число, у которого нужно найти тангенс", bg="antiquewhite").grid(row=21)
+    pole = tk.Entry(win)
+    pole.bind("<Return>", ftg)
+    pole.grid(row=22, column=0)
+    result = tk.Label(win)
+    result.grid(row=23, column=0)
+
+def ctg():
+    def fctg(event):
+        otn = math.cos(math.radians(int(pole.get())))/math.sin(math.radians(int(pole.get())))
+        result.configure(text=str(otn))
+
+    inputer = tk.Label(win, text="Введите число, у которого нужно найти котангенс", bg="antiquewhite").grid(row=24)
+    pole = tk.Entry(win)
+    pole.bind("<Return>", fctg)
+    pole.grid(row=25, column=0)
+    result = tk.Label(win)
+    result.grid(row=26, column=0)
+
+def log():
+    def flog(event):
+        result.configure(text=str(math.log(int(pole.get()), int(pole1.get()))))
+
+    inputer = tk.Label(win, text="Введите число, у которого нужно найти логарифм", bg="antiquewhite").grid(row=27)
+    pole = tk.Entry(win)
+    inputer = tk.Label(win, text="Введите основание логарифма", bg="antiquewhite").grid(row=29)
+    pole1 = tk.Entry(win)
+    pole1.grid(row=30, column=0)
+    pole1.bind("<Return>", flog)
+    pole.grid(row=28, column=0)
+    result = tk.Label(win)
+    result.grid(row=31, column=0)
+
+def linur():
+    def flinur(event):
+        a = int(pole.get())
+        b = int(pole1.get())
+        x = b/a
+        result.configure(text=str(x))
+
+    inputer = tk.Label(win, text="Приведите уравнение к виду ax=b, где a и b - числа,x - переменная", bg="antiquewhite").grid(row=32)
+    inputer1 = tk.Label(win, text="Введите a (коэффициент при переменной)", bg="antiquewhite").grid(row=33)
+    pole = tk.Entry(win)
+    pole.grid(row=34, column=0)
+    inputer2 = tk.Label(win, text="Введите b (свободный член)", bg="antiquewhite").grid(row=35)
+    pole1 = tk.Entry(win)
+    pole1.bind("<Return>", flinur)
+    pole1.grid(row=36, column=0)
+    result = tk.Label(win)
+    result.grid(row=37, column=0)
+
+def kvur():
+    def intsqrt(n):
+        m = 1
+        res = 0
+        boolregul = False
+        while m*m<(n+1):
+            if m*m == n:
+                boolregul = True
+                res = m
+            m+=1
+        if boolregul == False:
+            res = "√"+str(n)
+        return res
+    def fkvur(event):
+        a = int(pole.get())
+        b = int(pole1.get())
+        c = int(pole2.get())
+        d = (b*b)-(4*a*c)
+        res=""
+        if d<0:
+            res = "Нет корней (Дискриминант D<0)"
+        if d==0:
+            r = -b/(2*a)
+            res = "Единственный корень "+str(r)
+        if d>0:
+            if type(intsqrt(d)) is str:
+                res = "Два корня (" + str(-b) + "±" + str(intsqrt(d)) + ") /" + str(2 * a)
+            if type(intsqrt(d)) is int:
+                r1 = (-b + intsqrt(d)) / (2 * a)
+                r2 = (-b - intsqrt(d)) / (2 * a)
+                res = "Два корня " + str(r1) + " и " + str(r2)
+        result.configure(text=f"{res}")
+
+
+    inputer = tk.Label(win, text="Приведите уравнение к виду ax²+bx+c=0, где a, b и c - числа,x - переменная", bg="antiquewhite").grid(row=38)
+    inputer1 = tk.Label(win, text="Введите a (старший коэффициент)", bg="antiquewhite").grid(row=39)
+    pole = tk.Entry(win)
+    pole.grid(row=40, column=0)
+    inputer2 = tk.Label(win, text="Введите b (второй коэффициент)", bg="antiquewhite").grid(row=41)
+    pole1 = tk.Entry(win)
+    pole1.grid(row=42, column=0)
+    inputer3 = tk.Label(win, text="Введите с (свободный член)", bg="antiquewhite").grid(row=43)
+    pole2 = tk.Entry(win)
+    pole2.bind("<Return>", fkvur)
+    pole2.grid(row=44, column=0)
+    result = tk.Label(win)
+    result.grid(row=45, column=0)
+
+def prime():
+    def control(n):
+        i = 2
+        res = True
+        while i*i < (n+1):
+            if n%i == 0:
+                res = False
+                break
+            else:
+                i += 1
+        return res
+    def fprime(event):
+        n = int(pole.get())
+        if control(n)==True:
+            res = "Число является простым"
+        else:
+            res = "Число не является простым"
+        result.configure(text=f"{res}")
+    inputer = tk.Label(win, text="Введите число, которое нужно проверить", bg="antiquewhite").grid(row=46)
+    pole = tk.Entry(win)
+    pole.bind("<Return>", fprime)
+    pole.grid(row=47, column=0)
+    result = tk.Label(win)
+    result.grid(row=48, column=0)
+
+def divisors():
+    def alldivisors(n):
+        res = []
+        i = 1
+        while i * i < (n + 1):
+            if n%i==0:
+                res.append(i)
+                res.append(n//i)
+            i+=1
+        res.sort()
+        S = ""
+        for i in res:
+            S = S+str(i)+", "
+        return S
+    def fdiv(event):
+        res2 = alldivisors(int(pole.get()))
+        result.configure(text=" Все делители: "+ f"{res2}")
+    inputer = tk.Label(win, text="Введите число, у которого нужно найти делители", bg="antiquewhite").grid(row=49)
+    pole = tk.Entry(win)
+    pole.bind("<Return>", fdiv)
+    pole.grid(row=50, column=0)
+    result = tk.Label(win)
+    result.grid(row=51, column=0)
+def primedivisors():
+    def primedel(n):
+        res = []
+        i = 2
+        while i * i < (n+1):
+            if n % i == 0:
+                n = n//i
+                res.append(i)
+            else:
+                i += 1
+        if n > 1:
+            res.append(n)
+        L=[]
+        S = ""
+        for i in res:
+            if i not in L:
+                L.append(i)
+                S = S+str(i)+" в степени "+ str(res.count(i))+", "
+        return S
+    def fprimediv(event):
+        res = primedel(int(pole.get()))
+        result.configure(text="Простые множители: " + f"{res}")
+
+    inputer = tk.Label(win, text="Введите число, которое нужно разложить", bg="antiquewhite").grid(row=52)
+    pole = tk.Entry(win)
+    pole.bind("<Return>", fprimediv)
+    pole.grid(row=53, column=0)
+    result = tk.Label(win)
+    result.grid(row=54, column=0)
+
+def evklid():
+    def NOD(a,b):
+        while a != 0 and b != 0:
+            if a >= b:
+                a = a % b
+            else:
+                b = b % a
+        return max(a, b)
+    def fevklid(event):
+        a = int(pole.get())
+        b = int(pole1.get())
+        nod = NOD(a,b)
+        nok = (a*b)//nod
+        result.configure(text="НОД = " + f"{nod}" + ", НОК = "+ f"{nok}")
+    inputer1 = tk.Label(win, text="Введите 1 число", bg="antiquewhite").grid(row=55)
+    pole = tk.Entry(win)
+    pole.grid(row=56, column=0)
+    inputer2 = tk.Label(win, text="Введите 2 число", bg="antiquewhite").grid(row=57)
+    pole1 = tk.Entry(win)
+    pole1.bind("<Return>", fevklid)
+    pole1.grid(row=58, column=0)
+    result = tk.Label(win)
+    result.grid(row=59, column=0)
+
+def cut(lst, n):
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+def eratosphen():
+    def allprime(n):
+        a = [False, False] + [True] * (n - 1)
+        primelist = []
+        for i in range(2, n + 1):
+            if a[i] == True:
+                for q in range(2, n + 1):
+                    if q != i:
+                        if q % i == 0:
+                            a[q] = False
+        for i in range(1, n + 1):
+            if a[i] == True:
+                primelist.append(i)
+        res = list(cut(primelist, 40))
+        return res
+    def feratosphen(event):
+        res = allprime(int(pole.get()))
+        c = 0
+        for i in res:
+            result = tk.Label(win)
+            result.configure(text=f"{i}")
+            result.grid(row=62+c, column=0)
+            c +=1
+
+    inputer = tk.Label(win, text="Введите число n (верхний предел)", bg="antiquewhite").grid(row=60)
+    pole = tk.Entry(win)
+    pole.bind("<Return>", feratosphen)
+    pole.grid(row=61, column=0)
+
+def fibonacci():
+    def allfibonacci(n):
+        i1 = 0
+        i2 = 1
+        alllist = []
+        while i1 < n and i2 < n:
+            alllist.append(i1)
+            alllist.append(i2)
+            i1 = i1+i2
+            i2 = i1+i2
+
+        res = list(cut(alllist, 20))
+        return res
+    def ffibonacci(event):
+        res = allfibonacci(int(pole.get()))
+        c = 0
+        for i in res:
+            result = tk.Label(win)
+            result.configure(text=f"{i}")
+            result.grid(row=82+c, column=0)
+            c +=1
+
+    inputer = tk.Label(win, text="Введите число n (верхний предел)", bg="antiquewhite").grid(row=80)
+    pole = tk.Entry(win)
+    pole.bind("<Return>", ffibonacci)
+    pole.grid(row=81, column=0)
+
+def binomial():
+    def fbinomial(event):
+        n = int(pole.get())
+        k = int(pole1.get())
+        res = str(math.factorial(n)/(math.factorial(k)*math.factorial(n-k)))
+        result.configure(text=f"{res}")
+    inputer1 = tk.Label(win, text="Введите число n (число элементов множества)", bg="antiquewhite").grid(row=86)
+    pole = tk.Entry(win)
+    pole.grid(row=87, column=0)
+    inputer2 = tk.Label(win, text="Введите число k (число элементов подмножества)", bg="antiquewhite").grid(row=88)
+    pole1 = tk.Entry(win)
+    pole1.bind("<Return>", fbinomial)
+    pole1.grid(row=89, column=0)
+    result = tk.Label(win)
+    result.grid(row=90, column=0)
+
+def sumnat():
+    def fsumnat(event):
+        k = int(pole.get())
+        n = int(pole1.get())
+        res = str((n+k)*(n-k+1)/2)
+        result.configure(text=f"{res}")
+    inputer1 = tk.Label(win, text="Введите число k (меньшее)", bg="antiquewhite").grid(row=91)
+    pole = tk.Entry(win)
+    pole.grid(row=92, column=0)
+    inputer2 = tk.Label(win, text="Введите число n (большее)", bg="antiquewhite").grid(row=93)
+    pole1 = tk.Entry(win)
+    pole1.bind("<Return>", fsumnat)
+    pole1.grid(row=94, column=0)
+    result = tk.Label(win)
+    result.grid(row=95, column=0)
+
+def int_from_dec_to_q2(num, q2):
+    Listchisel = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    n = abs(num)
+    res = Listchisel[n % q2]
+    while n >= q2:
+        n = n // q2
+        res += Listchisel[n % q2]
+    return ('' if num >= 0 else '-') + res[::-1]
+def float_from_dec_to_q2(frac, q2):
+    alpha = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    res = ""
+    for i in range(10, 1, -1):
+        frac *= q2
+        frac = round(frac, i)
+        res += str(int(frac))
+        frac -= int(frac)
+    return res
+
+def from_q1_to_q2(strnumber, q1, q2):
+    Listchisel = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    if "." in strnumber:
+        num, frac = map(str, strnumber.split('.'))
+        if num == "":
+            res = ""
+            return res
+        num = int(num, q1)
+        a = int_from_dec_to_q2(num, q2)
+        b = 0
+        k = q1
+        for i in frac:
+            b += Listchisel.index(i) / k
+            k *= q1
+        b = float_from_dec_to_q2(b, q2)
+        res = a + "." + b
+    else:
+        res = int_from_dec_to_q2(int(strnumber, q1), q2)
+    return res
+
+def perevod():
+    def fperevod(event):
+        strnum = pole.get()
+        q1 = int(pole1.get())
+        q2 = int(pole2.get())
+        res = from_q1_to_q2(strnum, q1, q2)
+        result.configure(text=f"{res}")
+    inputer1 = tk.Label(win, text="Введите число (вместо запятой используйте точку!)", bg="antiquewhite").grid(row=96)
+    pole = tk.Entry(win)
+    pole.grid(row=97, column=0)
+    inputer2 = tk.Label(win, text="Введите систему счисления исходного числа (до 36)", bg="antiquewhite").grid(row=98)
+    pole1 = tk.Entry(win)
+    pole1.grid(row=99, column=0)
+    inputer3 = tk.Label(win, text="Введите систему счисления результата (до 36)", bg="antiquewhite").grid(row=100)
+    pole2 = tk.Entry(win)
+    pole2.bind("<Return>", fperevod)
+    pole2.grid(row=101, column=0)
+    result = tk.Label(win)
+    result.grid(row=102, column=0)
+def CalcInOtherSystem():
+    def calcing_in_OS():
+        St = pole.get()
+        q1 = int(pole1.get())
+        q2 = int(pole2.get())
+        operlist = ["+", "-", "*", "/", "**", "(", ")", "//", "%", "", " "]
+        new = []
+        lst = []
+        for i in St:
+            if i in operlist:
+                lst.append(" " + i + " ")
+            else:
+                lst.append(i)
+        S = "".join(lst)
+        lst2 = S.split(" ")
+        for i in lst2:
+            if i in operlist:
+                new.append(i)
+            else:
+                new.append(from_q1_to_q2(i, q1, 10))
+        S = "".join(new)
+        res = from_q1_to_q2(str(eval(S)), 10, q2)
+        return res
+    def fcalcos(event):
+        res = str(calcing_in_OS())
+        result.configure(text=f"{res}")
+
+    inputer1 = tk.Label(win, text="Введите выражение(вместо запятой используйте точку, отделяйте числа и знаки пробелами)", bg="antiquewhite").grid(row=103)
+    pole = tk.Entry(win, width=78)
+    pole.grid(row=104, column=0)
+    inputer2 = tk.Label(win, text="Введите его систему счисления (до 36)", bg="antiquewhite").grid(row=105)
+    pole1 = tk.Entry(win)
+    pole1.grid(row=106, column=0)
+    inputer3 = tk.Label(win, text="Введите систему счисления результата (до 36)",
+                        bg="antiquewhite").grid(row=107)
+    pole2 = tk.Entry(win)
+    pole2.bind("<Return>", fcalcos)
+    pole2.grid(row=108, column=0)
+    result = tk.Label(win)
+    result.grid(row=109, column=0)
+
+def randomgenerator():
+    def frandomgenerator(event):
+        k = int(pole.get())
+        n = int(pole1.get())
+        res = random.randint(k,n)
+        result.configure(text=f"{res}")
+    inputer1 = tk.Label(win, text="Введите нижний предел", bg="antiquewhite").grid(row=110)
+    pole = tk.Entry(win)
+    pole.grid(row=111, column=0)
+    inputer2 = tk.Label(win, text="Введите верхний предел", bg="antiquewhite").grid(row=112)
+    pole1 = tk.Entry(win)
+    pole1.bind("<Return>", frandomgenerator)
+    pole1.grid(row=113, column=0)
+    result = tk.Label(win)
+    result.grid(row=114, column=0)
+
+def passwordgenerator():
+    def fpasswordgenerator(event):
+        k = int(pole.get())
+        lst = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+                      'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] + [str(x) for x in range(0,9)]
+        res = ""
+        for i in range(k):
+            n = random.choice(lst)
+            res += n
+        result.configure(text=f"{res}")
+    inputer1 = tk.Label(win, text="Введите длину пароля", bg="antiquewhite").grid(row=91)
+    pole = tk.Entry(win)
+    pole.grid(row=92, column=0)
+    pole.bind("<Return>", fpasswordgenerator)
+    result = tk.Label(win)
+    result.grid(row=95, column=0)
+
+def click():
+    sel = select.get()
+    if sel == "Обычный калькулятор":
+        calc()
+    elif sel == "Кв.корень":
+        square()
+    elif sel == "Факториал":
+        factoriale()
+    elif sel == "SIN(синус)":
+        sin()
+    elif sel == "COS(косинус)":
+        cos()
+    elif sel == "TG(тангенс)":
+        tg()
+    elif sel == "CTG(котангенс)":
+        ctg()
+    elif sel =="LOG(логарифм)":
+        log()
+    elif sel == "Приведенное линейное уравнение":
+        linur()
+    elif sel == "Приведенное квадратное уравнение":
+        kvur()
+    elif sel == "Проверка числа на простоту":
+        prime()
+    elif sel == "Делители числа":
+        divisors()
+    elif sel == "Разложение на простые множители":
+        primedivisors()
+    elif sel == "НОД и НОК 2 чисел":
+        evklid()
+    elif sel == "Все простые числа от 2 до n":
+        eratosphen()
+    elif sel == "Все числа Фибоначчи от 2 до n":
+        fibonacci()
+    elif sel == "Биномиальный коэффициент":
+        binomial()
+    elif sel == "Сумма всех натуральных чисел от k до n":
+        sumnat()
+    elif sel == "Перевод систем счисления":
+        perevod()
+    elif sel == "Вычисления в других системах счисления":
+        CalcInOtherSystem()
+    elif sel == "Генератор случайных чисел":
+        randomgenerator()
+    elif sel == "Генератор паролей":
+        passwordgenerator()
+
+
+win = Tk()
+win.title("MathAssistant")
+win.geometry("500x600")
+win["bg"]="antiquewhite"
+hello = Label(win, text="Выберите нужную функцию", font=("Arial Bold", 20), fg="orange4", bg="antiquewhite")
+hello.grid(column=0, row=0)
+
+select = Combobox(win)
+select["width"] = 39
+select["values"] = ("Обычный калькулятор","Кв.корень", "LOG(логарифм)",
+                 "SIN(синус)", "COS(косинус)", "TG(тангенс)", "CTG(котангенс)",
+                 "Приведенное линейное уравнение", "Приведенное квадратное уравнение",
+                 "Проверка числа на простоту", "Делители числа", "Разложение на простые множители", "НОД и НОК 2 чисел",
+                 "Все простые числа от 2 до n", "Все числа Фибоначчи от 2 до n", "Факториал",
+                 "Биномиальный коэффициент", "Сумма всех натуральных чисел от k до n",
+                 "Перевод систем счисления", "Вычисления в других системах счисления", "Генератор случайных чисел", "Генератор паролей")
+select.grid(column=0, row=2)
+sel = select.get()
+
+
+vvod = Button(text="Выбрать", command=click, bg="DarkGoldenrod1")
+vvod.grid(column=0, row=3)
+
+win.mainloop()
